@@ -24,8 +24,8 @@ class BugService {
 
   async createBug(newBug) {
     try {
-      const res = await api.post('api/bugs/', newBug)
-      AppState.bugs = res.data
+      await api.post('api/bugs/', newBug)
+
       this.getBugs()
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
@@ -34,8 +34,10 @@ class BugService {
 
   async editBug(id, newBug) {
     try {
-      await api.get('api/bugs/' + id, newBug)
+      newBug.closed = !newBug.closed
+      await api.put('api/bugs/' + id, newBug)
       this.getBugs()
+      this.getActiveBug(id)
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }

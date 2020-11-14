@@ -1,29 +1,45 @@
 <template>
   <div class="activePage container-fluid">
     <div class="row mt-5">
-      <div class="col-8 offset-2 bg-light p-2">
+      <div class="col-8 offset-2 bg-light p-2 radius shadow-lg">
         <div class="row">
-          <div class="col-12 text-left">
-            <h3>
-              {{ activeBug.title }}
-            </h3>
+          <div class="col-12 d-flex justify-content-between">
+            <div class="d-flex move-left">
+              <i :class="{'text-danger': activeBug.closed}" class="fa fa-circle fa-2x text-success" aria-hidden="true"></i>
+              <h3 class="my-auto pl-4">
+                {{ activeBug.title }}
+              </h3>
+            </div>
+            <div class="d-flex">
+              <editBugComponent />
+              <button class="btn btn-danger radius-25" v-if="!activeBug.closed" @click="editBug(activeBug.id, activeBug)">
+                Close Case
+              </button>
+            </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-12 text-center">
-            <p>
+          <div class="col-12 text-left">
+            <p class="p-2">
               {{ activeBug.content }}
             </p>
           </div>
         </div>
         <div class="row">
           <div class="col-10 offset-1">
+            <div class="row">
+              <div class="col-12">
+                <h3>Notes</h3>
+              </div>
+            </div>
             <noteComponent v-for="note in notes" :key="note.id" :note-props="note" />
           </div>
         </div>
+        <div class="row">
+        </div>
       </div>
     </div>
-    <newNoteComponent />
+    <newNoteComponent v-if="!activeBug.closed" />
   </div>
 </template>
 
@@ -34,6 +50,7 @@ import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import NoteComponent from '../components/NoteComponent'
 import NewNoteComponent from '../components/newNoteComponent'
+import EditBugComponent from '../components/EditBugComponent'
 export default {
   name: 'ActivePage',
   setup() {
@@ -44,14 +61,20 @@ export default {
 
     return {
       activeBug: computed(() => AppState.activeBug),
-      notes: computed(() => AppState.notes)
+      notes: computed(() => AppState.notes),
+      editBug(id, bug) {
+        bugService.editBug(id, bug)
+      }
 
     }
   },
-  components: { NoteComponent, NewNoteComponent }
+  components: { NoteComponent, NewNoteComponent, EditBugComponent }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.move-left {
+  position: relative;
+  left: -55px;
+}
 </style>

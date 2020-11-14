@@ -1,0 +1,12 @@
+.radius {
+  border-radius: 15px;
+}
+
+.radius-25 {
+  border-radius: 25px;
+}
+
+.grow:hover {
+  transform: scale(1.01);
+  transition: all .25s ease-in-out;
+  }

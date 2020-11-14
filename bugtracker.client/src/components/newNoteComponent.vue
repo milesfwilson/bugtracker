@@ -1,8 +1,8 @@
 <template>
   <div class="newNoteComponent row">
     <div class="col-8 offset-2">
-      <div class="d-flex justify-content-end p-3">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
+      <div class="pt-2">
+        <button type="button" class="btn btn-dark radius-25" data-toggle="modal" data-target="#modelId">
           Add Note
         </button>
       </div>
@@ -31,22 +31,14 @@
               <div class="row">
                 <div class="col-12">
                   <form class="form-group" @submit.prevent="createNote(activeBug.id)">
-                    <input type="text" class="form-control" placeholder="Content" v-model="state.newNote.content">
-                    <button class="btn btn-primary" type="submit">
+                    <input type="text" class="form-control radius-25 my-2" placeholder="Content" v-model="state.newNote.content">
+                    <button class="btn btn-block btn-dark radius-25" type="submit">
                       Submit
                     </button>
                   </form>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">
-              Save
-            </button>
           </div>
         </div>
       </div>

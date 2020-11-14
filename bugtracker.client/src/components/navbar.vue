@@ -1,13 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
-        />
-      </div>
+      <h3>Tracker</h3>
     </router-link>
     <button
       class="navbar-toggler"
@@ -24,18 +18,13 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link :to="{ name: 'Home' }" class="nav-link">
-            Home
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
-            About
+            <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
           </router-link>
         </li>
       </ul>
       <span class="navbar-text">
         <button
-          class="btn btn-outline-primary text-uppercase"
+          class="btn btn-dark text-light text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -50,26 +39,22 @@
             <img
               :src="user.picture"
               alt="user photo"
-              height="40"
-              class="rounded"
+              height="50"
+              class="rounded-circle"
             />
-            <span class="mx-3">{{ user.name }}</span>
+
           </div>
           <div
             class="dropdown-menu p-0 list-group w-100"
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Profile' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Profile
-              </div>
-            </router-link>
+
             <div
               class="list-group-item list-group-item-action hoverable"
               @click="logout"
             >
-              logout
+              Logout
             </div>
           </div>
         </div>
@@ -122,6 +107,6 @@ a:hover {
   text-transform: uppercase;
 }
 .nav-item .nav-link.router-link-exact-active{
-  color: var(--primary);
+  color: var(--light);
 }
 </style>
