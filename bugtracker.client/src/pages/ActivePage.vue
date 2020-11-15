@@ -1,6 +1,16 @@
 <template>
   <div class="activePage container-fluid">
-    <div class="row mt-5">
+    <div class="row my-5" v-if="activeBug.id">
+      <div class="col-12 d-flex justify-content-center">
+        <div class="d-flex text-light bg-dark radius-25 shadow p-2">
+          <img :src="activeBug.creatorImg" class="rounded-circle mr-3" height="50" alt="">
+          <h4 class="my-auto">
+            {{ activeBug.creatorEmail.split('@').splice(0,1).join('') }}
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-8 offset-2 bg-light p-2 radius shadow-lg">
         <div class="row">
           <div class="col-12 d-flex justify-content-between">
@@ -77,4 +87,5 @@ export default {
   position: relative;
   left: -55px;
 }
+
 </style>

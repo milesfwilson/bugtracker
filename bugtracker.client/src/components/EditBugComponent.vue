@@ -23,9 +23,13 @@
             </button>
           </div>
           <div class="modal-body">
-            <button class="btn btn-danger radius-25">
-              Delete
-            </button>
+            <form class="form-group" @submit.prevent="editBugContents(activeBug.id)">
+              <input type="text" class="form-control radius-25 my-2" :placeholder="activeBug.title" v-model="state.newBug.title">
+              <input type="text" class="form-control radius-25 my-2" :placeholder="activeBug.content" v-model="state.newBug.content">
+              <button class="btn btn-block btn-dark radius-25" type="submit">
+                Submit
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -35,13 +39,22 @@
 
 <script>
 import { AppState } from '../AppState'
-import { computed } from 'vue'
+import { computed, reactive } from 'vue'
+import { bugService } from '../services/BugService'
 export default {
   name: 'EditBugComponent',
   setup() {
-    return {
+    const state = reactive({
+      newBug: {
 
-      activeBug: computed(() => AppState.activeBug)
+      }
+    })
+    return {
+      state,
+      activeBug: computed(() => AppState.activeBug),
+      editBugContents(id, newBug) {
+        bugService.editBugContents(id, state.newBug)
+      }
     }
   },
   components: {}

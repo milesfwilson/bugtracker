@@ -34,7 +34,7 @@ class NoteService {
 
   async editNote(id, newNote) {
     try {
-      await api.get('api/notes/' + id, newNote)
+      await api.put('api/notes/' + id, newNote)
       this.getNotes()
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)

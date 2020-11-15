@@ -1,5 +1,5 @@
 <template>
-  <div class="createBugComponent col-8 offset-2">
+  <div class="createBugComponent col-12">
     <form class="form-group border border-dark shadow radius p-2" @submit.prevent="createBug()">
       <input type="text" class="form-control radius-25 shadow" placeholder="Title" v-model="state.newBug.title">
       <input type="text" class="form-control radius-25 shadow my-2" placeholder="Description" v-model="state.newBug.content">

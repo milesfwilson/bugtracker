@@ -33,6 +33,8 @@ export class NoteController extends BaseController {
   async createNote(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
+      req.body.creatorEmail = req.userInfo.email
+      req.body.creatorImg = req.userInfo.picture
       res.send(await noteService.createNote(req.body))
     } catch (error) {
       next(error)

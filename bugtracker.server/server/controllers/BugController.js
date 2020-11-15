@@ -13,6 +13,7 @@ export class BugController extends BaseController {
       .post('', this.createBug)
       .put('/:bugId', this.editBug)
       .get('/:bugId/notes', this.getNotesByBug)
+      .delete('/:bugId', this.deleteBug)
   }
 
   async getAllBugs(req, res, next) {
@@ -42,6 +43,9 @@ export class BugController extends BaseController {
   async createBug(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
+      req.body.creatorEmail = req.userInfo.email
+      req.body.creatorImg = req.userInfo.picture
+
       res.send(await bugService.createBug(req.body))
     } catch (error) {
       next(error)
@@ -51,6 +55,14 @@ export class BugController extends BaseController {
   async editBug(req, res, next) {
     try {
       res.send(await bugService.editBug(req.params.bugId, req.body))
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async deleteBug(req, res, next) {
+    try {
+      res.send(await bugService.deleteBug(req.params.bugId))
     } catch (error) {
       next(error)
     }

@@ -5,7 +5,9 @@ const Note = new Schema(
   {
     content: { type: String, required: true },
     bugId: { type: String, required: true, ref: 'Bug' },
-    creatorId: { type: String, ref: 'Profile', required: true }
+    creatorId: { type: String, ref: 'Profile', required: true },
+    creatorEmail: { type: String, ref: 'Profile', required: true },
+    creatorImg: { type: String, ref: 'Profile', required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )

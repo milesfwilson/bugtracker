@@ -42,6 +42,16 @@ class BugService {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
   }
+
+  async editBugContents(id, newBug) {
+    try {
+      await api.put('api/bugs/' + id, newBug)
+      this.getBugs()
+      this.getActiveBug(id)
+    } catch (err) {
+      logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
+    }
+  }
 }
 
 export const bugService = new BugService()
