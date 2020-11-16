@@ -1,12 +1,10 @@
 <template>
-  <div class="newNoteComponent row">
-    <div class="col-8 offset-2">
-      <div class="pt-2">
-        <button type="button" class="btn btn-dark radius-25" data-toggle="modal" data-target="#modelId">
-          Add Note
-        </button>
-      </div>
-    </div>
+  <div class="newNoteComponent">
+    <button type="button" class="btn" data-toggle="modal" data-target="#modelId">
+      <h4 class="text-dark">
+        Add Comment
+      </h4>
+    </button>
 
     <!-- Modal -->
     <div class="modal fade"

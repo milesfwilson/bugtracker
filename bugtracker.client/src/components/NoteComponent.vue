@@ -9,8 +9,8 @@
       </div>
     </div>
     <div class="col-2 d-flex justify-content-end">
-      <button v-if="!activeBug.closed" type="button" class="btn btn-dark radius-25" data-toggle="modal" :data-target="'#modal'+noteProps.id">
-        Edit
+      <button v-if="!activeBug.closed" type="button" class="btn" data-toggle="modal" :data-target="'#modal'+noteProps.id">
+        <i class="far fa-edit"></i>
       </button>
       <button class="btn" @click="deleteNote(noteProps.id)" v-if="!activeBug.closed">
         <i class="fa fa-trash-o" aria-hidden="true"></i>

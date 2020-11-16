@@ -1,16 +1,6 @@
 <template>
   <div class="activePage container-fluid">
-    <div class="row my-5" v-if="activeBug.id">
-      <div class="col-12 d-flex justify-content-center">
-        <div class="d-flex text-light bg-dark radius-25 shadow p-2">
-          <img :src="activeBug.creatorImg" class="rounded-circle mr-3" height="50" alt="">
-          <h4 class="my-auto">
-            {{ activeBug.creatorEmail.split('@').splice(0,1).join('') }}
-          </h4>
-        </div>
-      </div>
-    </div>
-    <div class="row">
+    <div class="row pt-5 mt-5">
       <div class="col-8 offset-2 bg-light p-2 radius shadow-lg">
         <div class="row">
           <div class="col-12 d-flex justify-content-between">
@@ -21,6 +11,9 @@
               </h3>
             </div>
             <div class="d-flex">
+              <button class="btn" data-toggle="collapse" data-target="#contentId">
+                <i class="fas fa-info-circle"></i>
+              </button>
               <editBugComponent />
               <button class="btn btn-danger radius-25" v-if="!activeBug.closed" @click="editBug(activeBug.id, activeBug)">
                 Close Case
@@ -28,6 +21,26 @@
             </div>
           </div>
         </div>
+
+        <div class="row collapse" id="contentId" v-if="activeBug.id">
+          <div class="col-12 d-flex justify-content-center">
+            <div class="d-flex text-dark bg-light radius-25 p-2 my-2">
+              <img :src="activeBug.creatorImg" class="rounded-circle mr-4 align-self-center" height="75" alt="">
+              <div class="align-self-center">
+                <h6 class="">
+                  {{ activeBug.creatorEmail.split('@').splice(0,1).join('') }}
+                </h6>
+                <h6 class="small">
+                  Created: {{ activeBug.createdAt.split('T').splice(0,1).join('') }}
+                </h6>
+                <h6 class="small">
+                  Modified: {{ activeBug.updatedAt.split('T').splice(0,1).join('') }}
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-12 text-left">
             <p class="p-2">
@@ -36,12 +49,13 @@
           </div>
         </div>
         <div class="row">
+          <div class="col-12">
+            <newNoteComponent v-if="!activeBug.closed" />
+          </div>
+        </div>
+
+        <div class="row">
           <div class="col-10 offset-1">
-            <div class="row">
-              <div class="col-12">
-                <h3>Notes</h3>
-              </div>
-            </div>
             <noteComponent v-for="note in notes" :key="note.id" :note-props="note" />
           </div>
         </div>
@@ -49,7 +63,6 @@
         </div>
       </div>
     </div>
-    <newNoteComponent v-if="!activeBug.closed" />
   </div>
 </template>
 
@@ -86,6 +99,10 @@ export default {
 .move-left {
   position: relative;
   left: -55px;
+}
+
+.small {
+  font-size: 10;
 }
 
 </style>

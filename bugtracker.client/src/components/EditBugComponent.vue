@@ -1,7 +1,7 @@
 <template>
   <div class="editBugComponent">
-    <button class="btn btn-dark radius-25 mr-1" v-if="!activeBug.closed" data-toggle="modal" :data-target="'#edit'+activeBug.id">
-      Edit
+    <button class="btn mr-1" v-if="!activeBug.closed" data-toggle="modal" :data-target="'#edit'+activeBug.id">
+      <i class="far fa-edit"></i>
     </button>
 
     <!-- Modal -->

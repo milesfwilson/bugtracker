@@ -8,7 +8,7 @@
       </div>
       <div class="col-4 d-flex justify-content-end black">
         <button class="btn btn-dark radius-25 shadow" @click="order('all')">
-          Reset
+          All
         </button>
         <button class="btn btn-success radius-25 mx-1 shadow" @click="order('active')">
           Active
@@ -52,12 +52,18 @@
             </h6>
           </div>
           <div class="col-2 d-flex justify-content-end">
-            <h6 class="my-auto">
+            <button class="btn" @click="sortByCreated">
+              <i class="fas fa-sort text-light"></i>
+            </button>
+            <h6 class="my-auto text-light">
               Created
             </h6>
           </div>
           <div class="col-2 d-flex justify-content-end">
-            <h6 class="my-auto">
+            <button class="btn" @click="sortByModified">
+              <i class="fas fa-sort text-light"></i>
+            </button>
+            <h6 class="my-auto text-light">
               Modified
             </h6>
           </div>
@@ -73,6 +79,7 @@ import CreateBugComponent from '../components/createBugComponent'
 import BugComponent from '../components/bugComponent'
 import { computed } from 'vue'
 import { AppState } from '../AppState'
+import { bugService } from '../services/BugService'
 export default {
   name: 'Home',
   setup() {
@@ -82,8 +89,13 @@ export default {
       sort: computed(() => AppState.sort),
       order(status) {
         AppState.sort.order = status
+      },
+      sortByModified() {
+        bugService.sortByModified()
+      },
+      sortByCreated() {
+        bugService.sortByCreated()
       }
-
     }
   },
   components: { CreateBugComponent, BugComponent }

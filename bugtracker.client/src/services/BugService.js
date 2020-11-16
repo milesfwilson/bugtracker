@@ -12,6 +12,34 @@ class BugService {
     }
   }
 
+  async sortByModified() {
+    try {
+      if (!AppState.sort.updatedSort) {
+        AppState.bugs = AppState.bugs.sort((a, b) => b.updatedAt.split('T').splice(0, 1).join('').split('-').join('') - a.updatedAt.split('T').splice(0, 1).join('').split('-').join(''))
+      } else {
+        AppState.bugs = AppState.bugs.sort((b, a) => b.updatedAt.split('T').splice(0, 1).join('').split('-').join('') - a.updatedAt.split('T').splice(0, 1).join('').split('-').join(''))
+      }
+      AppState.sort.updatedSort = !AppState.sort.updatedSort
+      // AppState.bugs.sort((a, b) => b.lastUpdated - a.lastUpdated)
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async sortByCreated() {
+    try {
+      if (!AppState.sort.createdSort) {
+        AppState.bugs = AppState.bugs.sort((a, b) => b.createdAt.split('T').splice(0, 1).join('').split('-').join('') - a.createdAt.split('T').splice(0, 1).join('').split('-').join(''))
+      } else {
+        AppState.bugs = AppState.bugs.sort((b, a) => b.createdAt.split('T').splice(0, 1).join('').split('-').join('') - a.createdAt.split('T').splice(0, 1).join('').split('-').join(''))
+      }
+      AppState.sort.createdSort = !AppState.sort.createdSort
+      // AppState.bugs.sort((a, b) => b.lastUpdated - a.lastUpdated)
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
   async getActiveBug(id) {
     try {
       const res = await api.get('api/bugs/' + id)
