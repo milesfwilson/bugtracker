@@ -9,10 +9,10 @@
       </div>
     </div>
     <div class="col-2 d-flex justify-content-end">
-      <button v-if="!activeBug.closed" type="button" class="btn" data-toggle="modal" :data-target="'#modal'+noteProps.id">
+      <button v-if="!activeBug.closed && activeBug.creatorId == profile.id" type="button" class="btn" data-toggle="modal" :data-target="'#modal'+noteProps.id">
         <i class="far fa-edit"></i>
       </button>
-      <button class="btn" @click="deleteNote(noteProps.id)" v-if="!activeBug.closed">
+      <button class="btn" @click="deleteNote(noteProps.id)" v-if="!activeBug.closed && activeBug.creatorId == profile.id">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
       </button>
     </div>
@@ -67,7 +67,7 @@ export default {
     return {
       state,
       activeBug: computed(() => AppState.activeBug),
-
+      profile: computed(() => AppState.profile),
       deleteNote(id) {
         noteService.deleteNote(id)
       },

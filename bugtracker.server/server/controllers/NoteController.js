@@ -43,7 +43,9 @@ export class NoteController extends BaseController {
 
   async editNote(req, res, next) {
     try {
-      res.send(await noteService.editNote(req.params.noteId, req.body))
+      const userId = req.userInfo.id
+
+      res.send(await noteService.editNote(req.params.noteId, req.body, userId))
     } catch (error) {
       next(error)
     }
@@ -51,7 +53,9 @@ export class NoteController extends BaseController {
 
   async deleteNote(req, res, next) {
     try {
-      res.send(await noteService.deleteNote(req.params.noteId))
+      const userId = req.userInfo.id
+
+      res.send(await noteService.deleteNote(req.params.noteId, userId))
     } catch (error) {
       next(error)
     }

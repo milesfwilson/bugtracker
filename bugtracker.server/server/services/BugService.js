@@ -3,9 +3,9 @@ import { dbContext } from '../db/DbContext'
 // import { BadRequest } from '../utils/Errors'
 
 class BugService {
-  async deleteBug(bugId) {
-    return await dbContext.Bugs.findByIdAndDelete(bugId)
-  }
+  // async deleteBug(bugId) {
+  //   return await dbContext.Bugs.findByIdAndDelete(bugId)
+  // }
 
   async getAllBugs(query = {}) {
     return await dbContext.Bugs.find(query).populate('creatorId')

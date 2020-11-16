@@ -1,6 +1,6 @@
 <template>
   <div class="editBugComponent">
-    <button class="btn mr-1" v-if="!activeBug.closed" data-toggle="modal" :data-target="'#edit'+activeBug.id">
+    <button class="btn mr-1" v-if="!activeBug.closed && activeBug.creatorId == profile.id" data-toggle="modal" :data-target="'#edit'+activeBug.id">
       <i class="far fa-edit"></i>
     </button>
 
@@ -52,6 +52,7 @@ export default {
     return {
       state,
       activeBug: computed(() => AppState.activeBug),
+      profile: computed(() => AppState.profile),
       editBugContents(id, newBug) {
         bugService.editBugContents(id, state.newBug)
       }
